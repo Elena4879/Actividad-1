@@ -1,0 +1,59 @@
+<!DOCTYPE html>  
+<html lang="es">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Juego de Adivina el Número</title>  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            text-align: center;  
+            margin-top: 50px;  
+        }  
+        .resultado {  
+            margin-top: 20px;  
+            font-weight: bold;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <h1>¡Adivina el Número!</h1>  
+    <p>Estoy pensando en un número entre 1 y 100.</p>  
+    <input type="number" id="inputNumero" placeholder="Ingresa tu número">  
+    <button onclick="adivinaNumero()">Adivinar</button>  
+    <div class="resultado" id="resultado"></div>  
+
+    <script>  
+        let numeroSecreto = Math.floor(Math.random() * 100) + 1;  
+        let intentos = 0;  
+
+        function adivinaNumero() {  
+            const inputNumero = document.getElementById("inputNumero").value;  
+            const resultado = document.getElementById("resultado");  
+            
+            if (inputNumero === "") {  
+                resultado.textContent = "Por favor, ingresa un número.";  
+                return;  
+            }  
+
+            const numeroAdivinado = parseInt(inputNumero);  
+            intentos++;  
+
+            if (numeroAdivinado < numeroSecreto) {  
+                resultado.textContent = "Muy bajo. Intenta de nuevo.";  
+            } else if (numeroAdivinado > numeroSecreto) {  
+                resultado.textContent = "Muy alto. Intenta de nuevo.";  
+            } else {  
+                resultado.textContent = `¡Felicidades! Adivinaste el número ${numeroSecreto} en ${intentos} intentos.`;  
+                resetearJuego();  // Reinicia el juego después de adivinar correctamente  
+            }  
+        }  
+
+        function resetearJuego() {  
+            numeroSecreto = Math.floor(Math.random() * 100) + 1;  
+            intentos = 0;  
+            document.getElementById("inputNumero").value = "";  
+        }  
+    </script>  
+</body>  
+</html>
